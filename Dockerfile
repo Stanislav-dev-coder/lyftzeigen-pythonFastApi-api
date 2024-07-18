@@ -1,5 +1,8 @@
 FROM python:3.9-slim-buster
+
 COPY . .
 WORKDIR /
+
 RUN pip install --no-cache-dir --upgrade -r requirements.txt
-CMD ["fastapi", "run", "main.py", "--port", "8081"]
+
+CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8081"]
