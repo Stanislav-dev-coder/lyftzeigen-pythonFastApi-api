@@ -6,3 +6,4 @@ db = client["rndDB"]
 
 rndColIndex = db["rndColIndex"]
 rndColNoIndex = db["rndColNoIndex"]
+testCol = db["testCol"]
