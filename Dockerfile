@@ -1,7 +1,5 @@
 FROM python:3.9-slim-buster
 
-ENV MONGODB_URL="mongodb://mongoadmin:bdung@mongodb.lyftzeigen.ru:28017/"
-
 COPY . .
 WORKDIR /
 
