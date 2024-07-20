@@ -10,7 +10,7 @@ router = APIRouter()
 @router.get("/getAllTestCol")
 async def get_test_doc_list():
     """
-    GET first 10 docs from collection
-    :return:
+    GET first 10 docs from test collection
+    :return: list of docs
     """
     return list_serial(testCol.find().limit(10))
