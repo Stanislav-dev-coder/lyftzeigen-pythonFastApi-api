@@ -1,6 +1,6 @@
 from pymongo import MongoClient
 
-client = MongoClient("$MONGODB_URL")
+client = MongoClient("MONGODB_URL")
 
 db = client["rndDB"]
 
