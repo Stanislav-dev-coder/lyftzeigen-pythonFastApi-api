@@ -4,7 +4,7 @@ from envparse import Env
 env = Env()
 MONGODB_URL = env.str("MONGODB_URL")
 
-client = MongoClient(MONGODB_URL)
+client = MongoClient("mongodb://mongoadmin:bdung@mongodb.lyftzeigen.ru:28017/")
 
 db = client["rndDB"]
 
