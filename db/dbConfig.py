@@ -6,7 +6,12 @@ MONGODB_USER = os.environ.get("MONGODB_USER")
 MONGODB_PASS = os.environ.get("MONGODB_PASS")
 MONGODB_COLLECT = os.environ.get("MONGODB_COLLECT")
 
-client = MongoClient(f"mongodb://{MONGODB_USER}:{MONGODB_PASS}@{MONGODB_URL}/{MONGODB_COLLECT}")
+client = MongoClient(
+        MONGODB_URL,
+        username=MONGODB_USER,
+        password=MONGODB_PASS,
+        authSource=MONGODB_COLLECT
+)
 
 db = client["rndDB"]
 
