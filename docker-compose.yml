@@ -3,10 +3,10 @@ services:
   fastapi-app:
       image: emptyvessel/fastapi-app:latest
       environment:
-        - MONGODB_URL="mongodb://mongodb.lyftzeigen.ru:28017"
-        - MONGODB_USER="testUser"
-        - MONGODB_PASS="root1234"
-        - MONGODB_COLLECT="root1234"
+        - MONGODB_URL=mongodb://mongodb.lyftzeigen.ru:28017
+        - MONGODB_USER=testUser
+        - MONGODB_PASS=root1234
+        - MONGODB_COLLECT=root1234
       build:
         context: .
         dockerfile: ./Dockerfile
