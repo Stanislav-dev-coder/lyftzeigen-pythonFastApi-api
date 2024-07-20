@@ -1,17 +1,18 @@
 from pymongo import MongoClient
 import os
+from urllib.parse import quote_plus
+
 
 MONGODB_URL = os.environ.get("MONGODB_URL")
 MONGODB_USER = os.environ.get("MONGODB_USER")
 MONGODB_PASS = os.environ.get("MONGODB_PASS")
+MONGODB_COLLECT = os.environ.get("MONGODB_COLLECT")
 
-client = MongoClient(
-    MONGODB_URL,
-    username=MONGODB_USER,
-    password=MONGODB_PASS,
-    authSource='rndDB',
-    authMechanism='SCRAM-SHA-256'
+uri = "mongodb://%s:%s@%s/%s" % (
+    quote_plus(str(MONGODB_USER)), quote_plus(str(MONGODB_PASS)), quote_plus(str(MONGODB_URL)), quote_plus(str(MONGODB_COLLECT))
 )
+
+client = MongoClient(uri)
 
 db = client["rndDB"]
 
