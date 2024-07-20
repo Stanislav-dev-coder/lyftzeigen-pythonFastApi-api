@@ -23,11 +23,7 @@ def generate_fake_data(num_records):
         record = {
             "randomDateTime": fake.date_time_this_year(),
             "randomText": fake.text(),
-<<<<<<< HEAD
             "randomNumber": random.randint(42, 42000),
-=======
-            "randomNumber": random.randint(42,42000),
->>>>>>> 27d67ea (test)
         }
         fake_data.append(record)
     return fake_data
@@ -47,3 +43,4 @@ total_records = 20
 batch_size = 10
 
 insert_large_amount_of_data(total_records, batch_size)
+

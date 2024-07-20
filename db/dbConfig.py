@@ -10,7 +10,8 @@ client = MongoClient(
         MONGODB_URL,
         username=MONGODB_USER,
         password=MONGODB_PASS,
-        authSource=MONGODB_COLLECT
+        authSource=MONGODB_COLLECT,
+        authMechanism='SCRAM-SHA-256'
 )
 
 db = client["rndDB"]

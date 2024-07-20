@@ -6,7 +6,7 @@ services:
         - MONGODB_URL=mongodb://mongodb.lyftzeigen.ru:28017
         - MONGODB_USER=testUser
         - MONGODB_PASS=root1234
-        - MONGODB_COLLECT=root1234
+        - MONGODB_COLLECT=rnbDB
       build:
         context: .
         dockerfile: ./Dockerfile
