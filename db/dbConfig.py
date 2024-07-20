@@ -1,7 +1,8 @@
 from pymongo import MongoClient
-import os
+from envparse import Env
 
-MONGODB_URL = os.getenv("MONGODB_URL")
+env = Env()
+MONGODB_URL = env.str("MONGODB_URL")
 
 client = MongoClient(MONGODB_URL)
 
