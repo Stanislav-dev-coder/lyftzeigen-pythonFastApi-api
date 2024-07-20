@@ -4,8 +4,8 @@ services:
       image: emptyvessel/fastapi-app:latest
       environment:
         - MONGODB_URL=mongodb://mongodb.lyftzeigen.ru:28017/
-        - MONGODB_USER=mongoadmin
-        - MONGODB_PASS=bdung
+        - MONGODB_USER=testUser
+        - MONGODB_PASS=root1234
       build:
         context: .
         dockerfile: ./Dockerfile
