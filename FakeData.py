@@ -23,7 +23,11 @@ def generate_fake_data(num_records):
         record = {
             "randomDateTime": fake.date_time_this_year(),
             "randomText": fake.text(),
+<<<<<<< HEAD
             "randomNumber": random.randint(42, 42000),
+=======
+            "randomNumber": random.randint(42,42000),
+>>>>>>> 27d67ea (test)
         }
         fake_data.append(record)
     return fake_data
