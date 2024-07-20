@@ -1,3 +1,4 @@
+import gc
 from pymongo import MongoClient
 from faker import Faker
 import random
@@ -6,9 +7,14 @@ import random
 fake = Faker()
 
 # Подключение к MongoDB
-client = MongoClient("mongodb://mongodb.lyftzeigen.ru:28017/")
-db = client['randomTest']
-collection = db['indexRandomColletion']
+client = MongoClient(
+    "mongodb://mongoadmin:bdung@mongodb.lyftzeigen.ru:28017/")
+db = client['rndDB']
+indexRandomCollection = db['rndColIndex']
+noIndexRandomCollection = db['rndColNoIndex']
+
+
+# print(collection.count_estimated_documents({}))
 
 def generate_fake_data(num_records):
     fake_data = []
@@ -16,12 +22,23 @@ def generate_fake_data(num_records):
         record = {
             "randomDateTime": fake.date_time_this_year(),
             "randomText": fake.text(),
-            "randomNumber": fake.number(),
+            "randomNumber": random.randint(42, 42000),
         }
         fake_data.append(record)
     return fake_data
 
-num_records = 100  
-fake_data = generate_fake_data(num_records)
 
-collection.insert_many(fake_data)
+def insert_large_amount_of_data(total_records, batch_size):
+    for i in range(0, total_records, batch_size):
+        batch_data = generate_fake_data(min(batch_size, total_records - i))
+        indexRandomCollection.insert_many(batch_data)
+        noIndexRandomCollection.insert_many(batch_data)
+        print(f"Inserted batch {i // batch_size + 1}")
+        del batch_data
+        gc.collect()
+
+
+total_records = 999_999
+batch_size = 5000
+
+insert_large_amount_of_data(total_records, batch_size)

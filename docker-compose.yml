@@ -3,7 +3,7 @@ services:
   fastapi-app:
       image: emptyvessel/fastapi-app:latest
       environment:
-        - MONGODB_URL=mongodb://mongodb.lyftzeigen.ru:28017
+        - MONGODB_URL=mongodb://mongoadmin:bdung@mongodb.lyftzeigen.ru:28017
       build:
         context: .
         dockerfile: ./Dockerfile
