@@ -10,7 +10,7 @@ fake = Faker()
 client = MongoClient(
     "mongodb://mongoadmin:bdung@mongodb.lyftzeigen.ru:28017/")
 db = client['rndDB']
-indexRandomCollection = db['rndColIndex']
+# indexRandomCollection = db['rndColIndex']
 noIndexRandomCollection = db['rndColNoIndex']
 testCol = db['testCol']
 
@@ -32,14 +32,14 @@ def generate_fake_data(num_records):
 def insert_large_amount_of_data(total_records, batch_size):
     for i in range(0, total_records, batch_size):
         batch_data = generate_fake_data(min(batch_size, total_records - i))
-        indexRandomCollection.insert_many(batch_data)
+        # indexRandomCollection.insert_many(batch_data)
         noIndexRandomCollection.insert_many(batch_data)
         print(f"Inserted batch {i // batch_size + 1}")
         del batch_data
         gc.collect()
 
 
-total_records = 2_000_000
+total_records = 1_000_000
 batch_size = 1_000
 
 insert_large_amount_of_data(total_records, batch_size)

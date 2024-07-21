@@ -9,7 +9,7 @@ def get_date_service(collection, date: str):
     start_time = time.time()
 
     query = {"randomDateTime": query_date}
-    explain_plan = collection.find(query).explain()
+    explain_plan = collection.find().limit(10).sort("randomDateTime", 1).explain()
     end_time = time.time()
     execution_time = end_time - start_time
     print(explain_plan)
