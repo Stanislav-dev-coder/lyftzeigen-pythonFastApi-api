@@ -47,6 +47,11 @@ jobs:
         env:
           SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
           SSH_KNOWN_HOSTS: ${{ secrets.SSH_KNOWN_HOSTS }}
+          MONGODB_HOST:    ${{ secrets.MONGODB_HOST }}
+          MONGODB_PORT:    ${{ secrets.MONGODB_PORT }}
+          MONGODB_USER:    ${{ secrets.MONGODB_USER }}
+          MONGODB_PASS:    ${{ secrets.MONGODB_PASS }}
+          MONGODB_AUTH_DB: ${{ secrets.MONGODB_AUTH_DB }}
 
       - name: Create Docker Compose config
         run: |
