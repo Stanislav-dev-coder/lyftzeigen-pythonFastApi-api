@@ -3,11 +3,11 @@ services:
   fastapi-app:
       image: emptyvessel/fastapi-app:latest
       environment:
-        - MONGODB_HOST=${{ secrets.MONGODB_HOST }}
-        - MONGODB_PORT=${{ secrets.MONGODB_PORT }}
-        - MONGODB_USER=${{ secrets.MONGODB_USER }}
-        - MONGODB_PASS=${{ secrets.MONGODB_PASS }}
-        - MONGODB_AUTH_DB=${{ secrets.MONGODB_AUTH_DB }}
+        MONGODB_HOST: ${{ secrets.MONGODB_HOST }}
+        MONGODB_PORT: ${{ secrets.MONGODB_PORT }}
+        MONGODB_USER: ${{ secrets.MONGODB_USER }}
+        MONGODB_PASS: ${{ secrets.MONGODB_PASS }}
+        MONGODB_AUTH_DB: ${{ secrets.MONGODB_AUTH_DB }}
       build:
         context: .
         dockerfile: ./Dockerfile
