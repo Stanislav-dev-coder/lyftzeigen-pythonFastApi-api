@@ -1,38 +1,23 @@
 from fastapi import APIRouter, Query, HTTPException
-from models.randomDocument import RandomDocument
 from db.dbConfig import rndColIndex, rndColNoIndex, testCol
-from schema.schemas import list_serial
-from bson import ObjectId
-import time
-from datetime import datetime
-import pytz
+from services.get_date_service import get_date_service
 
 router = APIRouter()
 
 
 @router.get("/getIndexDate")
-async def get_test_doc_list(date: str = Query(..., description="Date in ISO format (e.g., 2024-02-23T21:25:41.726000Z)")):
-    """
-    GET first 10 docs from test collection
-    :return: list of docs
-    """
+async def get_date_in_index_collection(date: str = Query(description="Date in ISO format (e.g., 2024-02-23T21:25:41.726000Z)")):
     try:
-        # Преобразуем строку даты в объект datetime
-        query_date = datetime.strptime(date, "%Y-%m-%dT%H:%M:%S.%f").replace(tzinfo=pytz.UTC)
+        (execution_success,
+         execution_time_millis,
+         total_keys_examined,
+         execution_time) = get_date_service(rndColIndex, date)
 
-        start_time = time.time()
-
-        # Выполняем запрос с объяснением
-        query = {"randomDateTime": query_date}
-        explain_plan = rndColIndex.find(query).explain()
-
-        end_time = time.time()
-        execution_time = end_time - start_time
-
-        # Возвращаем результаты и время выполнения
         return {
-            "explainPlan": explain_plan,
-            "executionTimeSeconds": execution_time
+            "executionSuccess": execution_success,
+            "executionTimeMillis": execution_time_millis,
+            "totalKeysExamined": total_keys_examined,
+            "executionPythonTme": execution_time
         }
     except ValueError as e:
         raise HTTPException(status_code=400, detail=f"Invalid date format: {str(e)}")
@@ -41,28 +26,18 @@ async def get_test_doc_list(date: str = Query(..., description="Date in ISO form
 
 
 @router.get("/getNoIndexDate")
-async def get_test_doc_list(date: str = Query(..., description="Date in ISO format (e.g., 2024-02-23T21:25:41.726000Z)")):
-    """
-    GET first 10 docs from test collection
-    :return: list of docs
-    """
+async def get_date_in_noindex_collection(date: str = Query(description="Date in ISO format (e.g., 2024-02-23T21:25:41.726000Z)")):
     try:
-        # Преобразуем строку даты в объект datetime
-        query_date = datetime.strptime(date, "%Y-%m-%dT%H:%M:%S.%f").replace(tzinfo=pytz.UTC)
+        (execution_success,
+         execution_time_millis,
+         total_keys_examined,
+         execution_time) = get_date_service(rndColNoIndex, date)
 
-        start_time = time.time()
-
-        # Выполняем запрос с объяснением
-        query = {"randomDateTime": query_date}
-        explain_plan = rndColNoIndex.find(query).explain()
-
-        end_time = time.time()
-        execution_time = end_time - start_time
-
-        # Возвращаем результаты и время выполнения
         return {
-            "explainPlan": explain_plan,
-            "executionTimeSeconds": execution_time
+            "executionSuccess": execution_success,
+            "executionTimeMillis": execution_time_millis,
+            "totalKeysExamined": total_keys_examined,
+            "executionPythonTme": execution_time
         }
     except ValueError as e:
         raise HTTPException(status_code=400, detail=f"Invalid date format: {str(e)}")
