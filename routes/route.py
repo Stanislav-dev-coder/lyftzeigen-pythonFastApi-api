@@ -5,13 +5,13 @@ from services.get_date_service import get_date_service
 router = APIRouter()
 
 
-@router.get("/getIndexDate")
-async def get_date_in_index_collection(date: str = Query(description="Date in ISO format (e.g., 2024-02-23T21:25:41.726000Z)")):
+@router.get("/testIndexCollection")
+async def test_index_collection(count: int):
     try:
         (execution_success,
          execution_time_millis,
          total_keys_examined,
-         execution_time) = get_date_service(rndColIndex, date)
+         execution_time) = get_date_service(rndColIndex, count)
 
         return {
             "executionSuccess": execution_success,
@@ -25,13 +25,13 @@ async def get_date_in_index_collection(date: str = Query(description="Date in IS
         raise HTTPException(status_code=500, detail=str(e))
 
 
-@router.get("/getNoIndexDate")
-async def get_date_in_noindex_collection(date: str = Query(description="Date in ISO format (e.g., 2024-02-23T21:25:41.726000Z)")):
+@router.get("/testNoIndexCollection")
+async def test_no_index_collection(count: int):
     try:
         (execution_success,
          execution_time_millis,
          total_keys_examined,
-         execution_time) = get_date_service(rndColNoIndex, date)
+         execution_time) = get_date_service(rndColNoIndex, count)
 
         return {
             "executionSuccess": execution_success,
